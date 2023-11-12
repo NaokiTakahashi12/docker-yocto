@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  poky:
+    build:
+      context: docker
+      dockerfile: Dockerfile
+    image: naokitakahashi12/docker-yocto:langdale
+    tty: true
+    volumes:
+      - ./build:/home/yocto-builder/build:rw
+      - ./conf:/home/yocto-builder/build/conf:rw
+      - ./layers:/home/yocto-builder/layers
+    command: >
+      /bin/bash
