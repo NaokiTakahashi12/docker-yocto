@@ -58,8 +58,10 @@ RUN groupadd -g ${GID} ${GROUPNAME} \
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
+ARG YOCTO_DISTRO=kirkstone
+
 RUN git clone https://git.yoctoproject.org/git/poky \
         --depth 1 \
-        --branch langdale
+        --branch ${YOCTO_DISTRO}
 
 RUN echo ". /home/${USERNAME}/poky/oe-init-build-env /home/${USERNAME}/build" >> ~/.bashrc
