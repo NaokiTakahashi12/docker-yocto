@@ -7,8 +7,8 @@ services:
     image: naokitakahashi12/docker-yocto:langdale
     tty: true
     volumes:
-      - ./build:/home/yocto-builder/build:rw
-      - ./conf:/home/yocto-builder/build/conf:rw
-      - ./layers:/home/yocto-builder/layers
+      - ./build:/home/builder/build:rw
+      - ./conf:/home/builder/build/conf:rw
+      - ./layers:/home/builder/layers
     command: >
       /bin/bash
