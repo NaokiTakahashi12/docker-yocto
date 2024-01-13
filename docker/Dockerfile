@@ -34,17 +34,16 @@ RUN locale-gen en_US \
     && locale-gen en_US.UTF-8 \
     && update-locale \
 
-ARG USERNAME=builder
-ARG GROUPNAME=${USERNAME}
-ARG PASSWORD=${USERNAME}
-
-# TODO
-ARG UID=1000
-ARG GID=1000
-
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
+
+ARG USERNAME=builder
+ARG GROUPNAME=${USERNAME}
+ARG PASSWORD=${USERNAME}
+# TODO
+ARG UID=1000
+ARG GID=1000
 
 RUN groupadd -g ${GID} ${GROUPNAME} \
     && useradd \
