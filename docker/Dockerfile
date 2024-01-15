@@ -34,17 +34,16 @@ RUN locale-gen en_US \
     && locale-gen en_US.UTF-8 \
     && update-locale \
 
-ARG USERNAME=builder
-ARG GROUPNAME=${USERNAME}
-ARG PASSWORD=${USERNAME}
-
-# TODO
-ARG UID=1000
-ARG GID=1000
-
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
+
+ARG USERNAME=builder
+ARG GROUPNAME=${USERNAME}
+ARG PASSWORD=${USERNAME}
+# TODO
+ARG UID=1000
+ARG GID=1000
 
 RUN groupadd -g ${GID} ${GROUPNAME} \
     && useradd \
@@ -59,8 +58,10 @@ RUN groupadd -g ${GID} ${GROUPNAME} \
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
+ARG YOCTO_DISTRO=kirkstone
+
 RUN git clone https://git.yoctoproject.org/git/poky \
         --depth 1 \
-        --branch langdale
+        --branch ${YOCTO_DISTRO}
 
 RUN echo ". /home/${USERNAME}/poky/oe-init-build-env /home/${USERNAME}/build" >> ~/.bashrc
