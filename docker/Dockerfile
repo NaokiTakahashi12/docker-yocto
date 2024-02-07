@@ -11,8 +11,8 @@ RUN export DEBIAN_FRONTEND=nointeractive \
         diffstat \
         unzip \
         texinfo \
-        gcc-multilib \
         build-essential \
+        gcc-multilib-*-linux-gnu \
         chrpath \
         socat \
         libsdl1.2-dev \
