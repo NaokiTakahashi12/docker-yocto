@@ -11,12 +11,11 @@ RUN export DEBIAN_FRONTEND=nointeractive \
         diffstat \
         unzip \
         texinfo \
-        gcc-multilib \
         build-essential \
+        gcc-multilib-*-linux-gnu \
         chrpath \
         socat \
         libsdl1.2-dev \
-        xterm \
     && apt install --yes --no-install-recommends \
         cpio \
         file \
@@ -26,6 +25,12 @@ RUN export DEBIAN_FRONTEND=nointeractive \
     && apt install --yes --no-install-recommends \
         locales \
         ca-certificates \
+    && apt install --yes --no-install-recommends \
+        python3 \
+        tmux \
+        screen \
+        xterm \
+        bmap-tools \
     && apt autoremove --yes \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
