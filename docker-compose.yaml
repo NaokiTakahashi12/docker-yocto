@@ -1,16 +1,44 @@
 ---
 services:
-  poky:
+  poky-kirkstone:
     build:
       context: docker
       dockerfile: Dockerfile
       args:
         YOCTO_DISTRO: kirkstone
     image: naokitakahashi12/docker-yocto:kirkstone
+    privileged: true  # runqemu
     tty: true
     volumes:
-      - ./build:/home/builder/build:rw
-      - ./conf:/home/builder/build/conf:rw
-      - ./layers:/home/builder/layers
+      - type: bind
+        source: ./build/kirkstone
+        target: /home/builder/build
+      - type: bind
+        source: ./conf/kirkstone
+        target: /home/builder/build/conf
+      - type: bind
+        source: ./layers/kirkstone
+        target: /home/builder/layers
+    command: >
+      /bin/bash
+  poky-scarthgap:
+    build:
+      context: docker
+      dockerfile: Dockerfile
+      args:
+        YOCTO_DISTRO: scarthgap
+    image: naokitakahashi12/docker-yocto:scarthgap
+    privileged: true  # runqemu
+    tty: true
+    volumes:
+      - type: bind
+        source: ./build/scarthgap
+        target: /home/builder/build
+      - type: bind
+        source: ./conf/scarthgap
+        target: /home/builder/build/conf
+      - type: bind
+        source: ./layers/scarthgap
+        target: /home/builder/layers
     command: >
       /bin/bash
