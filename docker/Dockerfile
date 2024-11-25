@@ -27,10 +27,13 @@ RUN export DEBIAN_FRONTEND=nointeractive \
         ca-certificates \
     && apt install --yes --no-install-recommends \
         python3 \
+        python3-setuptools \
         tmux \
         screen \
         xterm \
         bmap-tools \
+        iproute2 \
+        iputils-ping \
     && apt autoremove --yes \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
@@ -58,7 +61,10 @@ RUN groupadd -g ${GID} ${GROUPNAME} \
         -g ${GID} \
         ${USERNAME} \
     && echo ${USERNAME}:${PASSWORD} | chpasswd \
-    && chown -R ${USERNAME} /home/${USERNAME}
+    && chown -R ${USERNAME} /home/${USERNAME} \
+    && usermod -aG sudo ${USERNAME} \
+    && git config --global user.name "${USERNAME}" \
+    && git config --global user.email ""
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
